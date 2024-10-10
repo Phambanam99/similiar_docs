@@ -1,0 +1,16 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports: 
+      - 11434:11434
+    volumes: 
+      - ./ollama:/root/.ollama      
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    ports:
+      - "6333:6333"       # Exposes Qdrant's default API port
+    volumes:
+      - ./qdrant_data:/qdrant/storage  # Mounts a named volume to persist data
+    restart: unless-stopped         # Automatically restart unless the container is stopped manually
